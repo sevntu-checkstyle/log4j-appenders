@@ -1,0 +1,1 @@
+In this project we will try to create SMTP Appender that will be configurable for cases that produce a lot of messages. 

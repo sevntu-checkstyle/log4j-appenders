@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration debug="false" xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!--
+      This default ConsoleAppender is used to log all NON perf4j messages
+      to System.out
+    -->
+	<!--
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.target=System.out
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+#log4j.appender.console.layout.conversionPattern=%d %5p %t %l - %m%n
+log4j.appender.console.layout.conversionPattern=%d %5p [%t] - %m%n
+-->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %5p [%t] - %m%n" />
+		</layout>
+	</appender>
+<!--
+# SMTP appender 
+log4j.appender.myMail=org.apache.log4j.net.MySMTPAppender
+log4j.appender.myMail.Threshold=WARN
+log4j.appender.myMail.BufferSize=10
+log4j.appender.myMail.To=username@agency.gov
+log4j.appender.myMail.From=username@agency.gov
+log4j.appender.myMail.SMTPHost=smtphost
+log4j.appender.myMail.Subject=Log4J Message
+log4j.appender.myMail.layout=org.apache.log4j.PatternLayout
+log4j.appender.myMail.layout.ConversionPattern=%5p [%t] (%F:%L) - %m%n 
+ -->
+
+    <appender name="myMail" class="org.apache.log4j.net.PostponeSMTPAppender">
+        <param name="Threshold" value="WARN" />
+        <param name="BufferSize" value="10000" />
+        <param name="To" value="user@gmail.com" />
+        <param name="From" value="user@gmail.com" />
+        <param name="SMTPHost" value="smtp.gmail.com" />
+        <param name="Subject" value="Log4J Message" />
+        
+        <param name="SMTPUsername" value="user" />
+        <param name="SMTPPassword" value="password" />
+        <param name="LocationInfo" value="true" />
+        <param name="SMTPDebug" value="true" />
+        <param name="SMTPPort" value="465" />
+        <param name="SMTPProtocol" value="smtps" />
+        <param name="Postpone" value="10000" />
+        
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%5p [%t] (%F:%L) - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="error" />
+            <param name="LevelMax" value="fatal" />
+        </filter>
+    </appender>
+
+	<!--
+log4j.appender.fileServer=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.fileServer.file=${EAMRoot}/Server/log/server.log
+log4j.appender.fileServer.DatePattern='.'yyyy-MM-dd
+log4j.appender.fileServer.layout=org.apache.log4j.PatternLayout
+log4j.appender.fileServer.layout.ConversionPattern=%d %5p - %m%n
+-->
+	<appender name="fileServer" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="server.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %5p - %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="org" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="fileServer" />
+		<appender-ref ref="myMail" />
+	</logger>
+</log4j:configuration>

@@ -1,10 +1,3 @@
-/* Project: log4j
- * File: PostponeSMTPAppender.java
- * Created on Dec 3, 2011
- *  
- * Author: Sergiy Goncharenko
- * Copyright 2011, Edifecs Inc.
- */
 package org.apache.log4j.net;
 
 import java.util.ArrayList;
@@ -20,17 +13,6 @@ import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.OptionHandler;
 import org.apache.log4j.spi.TriggeringEventEvaluator;
 
-/**
- * <p>TitOle: PostponeSMTPAppender.java </p>
- * <p>Description:  </p>
- * Typical usage:
- *
- * <p>Copyright (c) 2011</p>
- * <p>Company: Edifecs Inc.</p>
- * $Date: $
- * @version $Revision: $
- * $Header: MySMTPAppender.java, Dec 3, 2011 11:53:39 PM SergeyG Exp $
- */
 public class PostponeSMTPAppender extends SMTPAppender
 {
     /*
